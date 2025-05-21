@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calcul des Conditions de Coupe</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Calcul des Conditions de Coupe</h1>
+
+      <section class="selection">
+        <label for="material">🛠 Sélectionne un matériau :</label>
+        <select id="material" onchange="updateValues()">
+          <option value="Aluminium1">Aluminium <10% Si</option>
+          <option value="Aluminium2">Aluminium >10% Si</option>
+          <option value="Cuivre">Cuivre, laiton, etc.</option>
+        </select>
+
+        <label for="parametre">📊 Choisis une valeur à calculer :</label>
+        <select id="parametre" onchange="afficherQuestionnaire()">
+          <option value="">-- Sélectionner --</option>
+          <option value="n">Fréquence de rotation (n)</option>
+          <option value="Vf">Vitesse d'avance (Vf)</option>
+        </select>
+      </section>
+
+      <section id="questionnaire" style="display: none">
+        <h2>📝 Paramètres requis :</h2>
+        <div id="inputs"></div>
+        <button class="btn" onclick="calculer()">🔍 Calculer</button>
+      </section>
+
+      <section class="resultats">
+        <h2>📌 Résultats :</h2>
+        <div class="output">
+          <p>Fréquence de rotation (n) : <span id="n">---</span> tr/min</p>
+          <p>Vitesse d'avance (Vf) : <span id="Vf">---</span> mm/min</p>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
