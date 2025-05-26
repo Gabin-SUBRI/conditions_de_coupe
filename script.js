@@ -1,19 +1,19 @@
 const materialData = {
-  Acier: { Vc: 80, fz: 0.05 },
-  Aluminium: { Vc: 200, fz: 0.1 },
-  Cuivre: { Vc: 100, fz: 0.05 },
-  Titane: { Vc: 30, fz: 0.02 },
-  Bois: { Vc: 300, fz: 0.2 },
-  Béton: { Vc: 50, fz: 0.1 },
-  Verre: { Vc: 50, fz: 0.02 },
-  Plastique: { Vc: 100, fz: 0.1 },
-  Céramique: { Vc: 50, fz: 0.02 },
-  Carbone: { Vc: 100, fz: 0.05 },
-  Caoutchouc: { Vc: 50, fz: 0.1 },
-  Liège: { Vc: 200, fz: 0.2 },
-  Composite: { Vc: 100, fz: 0.05 },
-  Laiton: { Vc: 100, fz: 0.05 },
-  Nickel: { Vc: 50, fz: 0.02 },
+  Acier: { Vc: 80 },
+  Aluminium: { Vc: 200 },
+  Cuivre: { Vc: 100 },
+  Titane: { Vc: 30 },
+  Bois: { Vc: 300 },
+  Béton: { Vc: 50 },
+  Verre: { Vc: 50 },
+  Plastique: { Vc: 100 },
+  Céramique: { Vc: 50 },
+  Carbone: { Vc: 100 },
+  Caoutchouc: { Vc: 50 },
+  Liège: { Vc: 200 },
+  Composite: { Vc: 100 },
+  Laiton: { Vc: 100 },
+  Nickel: { Vc: 50 },
 };
 
 function afficherQuestionnaire() {
@@ -26,7 +26,6 @@ function afficherQuestionnaire() {
 
   const parametreData = {
     n: `<label for="Vc">Vitesse de coupe (Vc) :</label>
-         <input type="number" id="Vc">
          <label for="D">Diamètre de l'outil (D) :</label>
          <input type="number" id="D">`,
 
@@ -38,7 +37,6 @@ function afficherQuestionnaire() {
          <input type="number" id="Z">`,
 
     Tous: `<label for="Vc">Vitesse de coupe (Vc) :</label>
-           <input type="number" id="Vc">
            <label for="D">Diamètre de l'outil (D) :</label>
            <input type="number" id="D">
            <label for="fz">Avance par dent (fz) :</label>
@@ -144,9 +142,24 @@ function resetValues() {
   document.getElementById("n").textContent = "---";
   document.getElementById("Vf").textContent = "---";
 
+  // Vérifier si l'input n existe et le réinitialiser
+  const nInput = document.getElementById("n");
+  if (nInput) {
+    nInput.value = "";
+  }
+
   // Réinitialisation du choix du paramètre
   document.getElementById("parametre").value = "";
 
   // Masquer le questionnaire après réinitialisation
   document.getElementById("questionnaire").style.display = "none";
+}
+
+function updateValues() {
+  const material = document.getElementById("material").value;
+  const vcInput = document.getElementById("Vc");
+
+  if (materialData[material]) {
+    vcInput.value = materialData[material].Vc;
+  }
 }
