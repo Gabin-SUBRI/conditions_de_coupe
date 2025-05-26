@@ -52,40 +52,101 @@ function afficherQuestionnaire() {
   }
 }
 
-function calculer() {
-  const parametre = document.getElementById("parametre").value;
-  let resultN = 0,
-    resultVf = 0;
+function calculerN() {
+  const Vc = parseFloat(document.getElementById("Vc").value);
+  const D = parseFloat(document.getElementById("D").value);
 
-  if (parametre === "n" || parametre === "Tous") {
-    const Vc = parseFloat(document.getElementById("Vc").value);
-    const D = parseFloat(document.getElementById("D").value);
-    if (isNaN(Vc) || isNaN(D) || Vc <= 0 || D <= 0) {
-      alert("🛑 Entrez des valeurs valides !");
-      return;
-    }
-    resultN = (1000 * Vc) / (Math.PI * D);
-    document.getElementById("n").textContent = resultN.toFixed(2);
+  if (isNaN(Vc) || isNaN(D) || Vc <= 0 || D <= 0) {
+    alert("🛑 Entrez des valeurs valides pour n !");
+    return;
   }
 
+  const resultN = (1000 * Vc) / (Math.PI * D);
+  document.getElementById("n").textContent = resultN.toFixed(2);
+}
+
+function calculerVf() {
+  let n = parseFloat(document.getElementById("n").value); // 🔥 Récupère `n` de l'input
+
+  if (isNaN(n) || n <= 0) {
+    alert("🛑 Entrez une valeur valide pour n avant de calculer Vf !");
+    return;
+  }
+
+  const fz = parseFloat(document.getElementById("fz").value);
+  const Z = parseInt(document.getElementById("Z").value);
+
+  if (isNaN(fz) || isNaN(Z) || fz <= 0 || Z <= 0) {
+    alert("🛑 Entrez des valeurs valides pour Vf !");
+    return;
+  }
+
+  const resultVf = n * fz * Z;
+  document.getElementById("Vf").textContent = resultVf.toFixed(2);
+}
+
+function calculer() {
+  const parametre = document.getElementById("parametre").value;
+  let calculatedN = 0,
+    resultVf = 0;
+
+  // ✅ Calcul de n en premier
+  if (parametre === "n" || parametre === "Tous") {
+    calculatedN = calculerN(); // Stocker le n calculé
+    document.getElementById("n").textContent = calculatedN.toFixed(2);
+  }
+
+  // ✅ Calcul de Vf avec le n déjà défini correctement
   if (parametre === "Vf" || parametre === "Tous") {
-    const n = resultN || parseFloat(document.getElementById("n").textContent);
-    const fz = parseFloat(document.getElementById("fz").value);
-    const Z = parseInt(document.getElementById("Z").value);
-    if (isNaN(n) || isNaN(fz) || isNaN(Z) || fz <= 0 || Z <= 0) {
-      alert("🛑 Entrez des valeurs valides !");
+    let n = calculatedN || parseFloat(document.getElementById("n").value);
+
+    if (isNaN(n) || n <= 0) {
+      alert("🛑 Le n doit être calculé avant Vf !");
       return;
     }
-    resultVf = n * fz * Z;
+
+    resultVf = calculerVf(n); // Calculer Vf avec le bon `n`
     document.getElementById("Vf").textContent = resultVf.toFixed(2);
   }
 }
 
+function calculerN() {
+  const Vc = parseFloat(document.getElementById("Vc").value);
+  const D = parseFloat(document.getElementById("D").value);
+
+  if (isNaN(Vc) || isNaN(D) || Vc <= 0 || D <= 0) {
+    alert("🛑 Entrez des valeurs valides pour n !");
+    return 0;
+  }
+
+  return (1000 * Vc) / (Math.PI * D); // Retourner le résultat de n
+}
+
+function calculerVf(n) {
+  const fz = parseFloat(document.getElementById("fz").value);
+  const Z = parseInt(document.getElementById("Z").value);
+
+  if (isNaN(fz) || isNaN(Z) || fz <= 0 || Z <= 0) {
+    alert("🛑 Entrez des valeurs valides pour Vf !");
+    return 0;
+  }
+
+  return n * fz * Z; // Retourner le résultat de Vf
+}
+
 function resetValues() {
-  document.getElementById("Vc").value = "";
-  document.getElementById("D").value = "";
-  document.getElementById("fz").value = "";
-  document.getElementById("Z").value = "";
+  // Réinitialiser tous les champs visibles
+  document.querySelectorAll("#inputs input").forEach((input) => {
+    input.value = "";
+  });
+
+  // Réinitialiser les résultats affichés
   document.getElementById("n").textContent = "---";
   document.getElementById("Vf").textContent = "---";
+
+  // Réinitialisation du choix du paramètre
+  document.getElementById("parametre").value = "";
+
+  // Masquer le questionnaire après réinitialisation
+  document.getElementById("questionnaire").style.display = "none";
 }
