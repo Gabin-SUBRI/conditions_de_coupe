@@ -1,4 +1,5 @@
 const materialData = {
+  Selection: { Vc: 0 },
   Acier: { Vc: 80 },
   Aluminium: { Vc: 200 },
   Cuivre: { Vc: 100 },
@@ -161,5 +162,35 @@ function updateValues() {
 
   if (materialData[material]) {
     vcInput.value = materialData[material].Vc;
+  }
+}
+function updateOperation() {
+  const operation = document.getElementById("operation").value;
+  if (operation === "Selectionner") {
+    document.getElementsByClassName("selection").style.display = "none";
+  }
+  if (operation === "Fraisage") {
+    document.getElementById("parametre").style.display = "block";
+    document.getElementById("questionnaire").style.display = "none";
+  } else {
+    document.getElementById("parametre").style.display = "none";
+    document.getElementById("questionnaire").style.display = "block";
+    document.getElementById("inputs").innerHTML = ""; // Réinitialisation du formulaire
+
+    if (operation === "Perçage") {
+      document.getElementById("inputs").innerHTML = `
+        <label for="D">Diamètre du foret (D) :</label>
+        <input type="number" id="D">
+        <label for="Vc">Vitesse de coupe (Vc) :</label>
+        <input type="number" id="Vc" readonly>
+      `;
+    } else if (operation === "Tournage") {
+      document.getElementById("inputs").innerHTML = `
+        <label for="D">Diamètre de la pièce (D) :</label>
+        <input type="number" id="D">
+        <label for="Vc">Vitesse de coupe (Vc) :</label>
+        <input type="number" id="Vc" readonly>
+      `;
+    }
   }
 }

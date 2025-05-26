@@ -10,10 +10,18 @@
   <body>
     <div class="container">
       <h1>Calcul des Conditions de Coupe</h1>
+      <label for="operation">🔧 Choisis une opération :</label>
+      <select id="operation" onchange="updateOperation()">
+        <option value="Selectionner">-- Selectionner --</option>
+        <option value="Fraisage">Fraisage</option>
+        <option value="Perçage">Perçage</option>
+        <option value="Tournage">Tournage</option>
+      </select>
 
       <section class="selection">
-        <label for="material">🛠 Sélectionne un matériau :</label>
+        <label for="material">🛠 Matériaux :</label>
         <select id="material" onchange="updateValues()">
+          <option value="Selection">-- Selectionner --</option>
           <option value="Acier">Acier</option>
           <option value="Aluminium">Aluminium</option>
           <option value="Cuivre">Cuivre</option>
