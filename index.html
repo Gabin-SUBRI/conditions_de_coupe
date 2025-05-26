@@ -18,17 +18,6 @@
           <option value="Aluminium">Aluminium</option>
           <option value="Cuivre">Cuivre</option>
           <option value="Titane">Titane</option>
-          <option value="Bois">Bois</option>
-          <option value="Béton">Béton</option>
-          <option value="Verre">Verre</option>
-          <option value="Plastique">Plastique</option>
-          <option value="Céramique">Céramique</option>
-          <option value="Carbone">Carbone</option>
-          <option value="Caoutchouc">Caoutchouc</option>
-          <option value="Liège">Liège</option>
-          <option value="Composite">Composite</option>
-          <option value="Laiton">Laiton</option>
-          <option value="Nickel">Nickel</option>
         </select>
 
         <label for="parametre">📊 Choisis une valeur à calculer :</label>
@@ -44,13 +33,20 @@
         <h2>📝 Paramètres requis :</h2>
         <div id="inputs"></div>
         <button class="btn" onclick="calculer()">🔍 Calculer</button>
+        <button class="btn" onclick="resetValues()">🔄 Réinitialiser</button>
       </section>
 
       <section class="resultats">
         <h2>📌 Résultats :</h2>
         <div class="output">
-          <p>Fréquence de rotation (n) : <span id="n">---</span> tr/min</p>
-          <p>Vitesse d'avance (Vf) : <span id="Vf">---</span> mm/min</p>
+          <p>
+            Fréquence de rotation (n) : <span id="n">---</span>
+            <small>tr/min</small>
+          </p>
+          <p>
+            Vitesse d'avance (Vf) : <span id="Vf">---</span>
+            <small>mm/min</small>
+          </p>
         </div>
       </section>
     </div>

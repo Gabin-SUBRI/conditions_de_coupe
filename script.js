@@ -60,17 +60,32 @@ function calculer() {
   if (parametre === "n" || parametre === "Tous") {
     const Vc = parseFloat(document.getElementById("Vc").value);
     const D = parseFloat(document.getElementById("D").value);
-    if (!Vc || !D) return alert("🛑 Entrez des valeurs valides !");
+    if (isNaN(Vc) || isNaN(D) || Vc <= 0 || D <= 0) {
+      alert("🛑 Entrez des valeurs valides !");
+      return;
+    }
     resultN = (1000 * Vc) / (Math.PI * D);
     document.getElementById("n").textContent = resultN.toFixed(2);
   }
 
   if (parametre === "Vf" || parametre === "Tous") {
-    const n = parseFloat(document.getElementById("n").value);
+    const n = resultN || parseFloat(document.getElementById("n").textContent);
     const fz = parseFloat(document.getElementById("fz").value);
     const Z = parseInt(document.getElementById("Z").value);
-    if (!n || !fz || !Z) return alert("🛑 Entrez des valeurs valides !");
+    if (isNaN(n) || isNaN(fz) || isNaN(Z) || fz <= 0 || Z <= 0) {
+      alert("🛑 Entrez des valeurs valides !");
+      return;
+    }
     resultVf = n * fz * Z;
     document.getElementById("Vf").textContent = resultVf.toFixed(2);
   }
+}
+
+function resetValues() {
+  document.getElementById("Vc").value = "";
+  document.getElementById("D").value = "";
+  document.getElementById("fz").value = "";
+  document.getElementById("Z").value = "";
+  document.getElementById("n").textContent = "---";
+  document.getElementById("Vf").textContent = "---";
 }

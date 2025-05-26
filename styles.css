@@ -62,8 +62,41 @@ input {
   background-color: #b8860b; /* Or plus profond */
 }
 
+.resultats {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 15px;
+  background: #2c3e50; /* Fond foncé élégant */
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.resultats h2 {
+  color: #f0e68c;
+  text-align: center;
+  font-size: 24px;
+}
+
+.output {
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
+
 .output p {
   font-size: 20px;
   font-weight: bold;
-  color: #f0e68c; /* Or subtil */
+  color: #ffffff;
+  margin: 8px 0;
+  text-align: center;
+}
+
+.output span {
+  color: #f39c12; /* Couleur contrastante pour les valeurs */
+  font-size: 22px;
+}
+
+small {
+  font-size: 16px;
+  color: #ccc;
 }
