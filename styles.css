@@ -129,13 +129,17 @@ small {
   background-color: #cc0000;
 }
 
+div#btn {
+  display: flex;
+  flex-direction: column;
+}
+
 /* Media Queries */
 @media (max-width: 600px) {
   body {
     height: 100vh; /* Utilisation de 100vh pour prendre toute la hauteur */
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     overflow: hidden; /* Empêcher le scroll */
   }
@@ -143,11 +147,28 @@ small {
   .container {
     width: 90%;
     max-width: 350px;
+    margin: 0px;
+    position: top;
     padding: 20px;
   }
 
   label {
     font-size: 16px;
+  }
+
+  #inputs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px; /* Espacement entre les champs */
+    align-items: center;
+  }
+
+  #inputs input,
+  #inputs select {
+    flex: 1; /* Permet aux éléments de prendre une largeur équilibrée */
+    padding: 8px;
+    font-size: 14px;
   }
 
   input,
@@ -167,5 +188,14 @@ small {
 
   .output span {
     font-size: 20px;
+  }
+
+  div#btn {
+    display: flex;
+    flex-direction: row;
+  }
+  .btn,
+  .btn btn-reset {
+    margin: 5px;
   }
 }

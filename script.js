@@ -32,23 +32,23 @@ document.getElementById("process").addEventListener("change", function () {
 
   if (process === "tournage") {
     inputsDiv.innerHTML = `
-            <label for="diameter">Diamètre (mm) :</label>
+            <label for="diameter">Dm:</label>
             <input type="number" id="diameter">
         `;
   } else if (process === "fraisage") {
     inputsDiv.innerHTML = `
-            <label for="dCap">Diamètre de coupe (mm) :</label>
+            <label for="dCap">DCap:</label>
             <input type="number" id="dCap">
-            <label for="fz">Avance par dent (mm) :</label>
+            <label for="fz">fz:</label>
             <input type="number" id="fz">
-            <label for="z">Nombre de dents :</label>
+            <label for="z">Z</label>
             <input type="number" id="z">
         `;
   } else if (process === "percage") {
     inputsDiv.innerHTML = `
-            <label for="fn">Avance par tour (mm) :</label>
+            <label for="fn">Fn:</label>
             <input type="number" id="fn">
-            <label for="n">Vitesse de broche (tours/min) :</label>
+            <label for="n">n:</label>
             <input type="number" id="n">
         `;
   }
