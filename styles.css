@@ -132,13 +132,12 @@ small {
 /* Media Queries */
 @media (max-width: 600px) {
   body {
+    height: 100vh; /* Utilisation de 100vh pour prendre toute la hauteur */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
+    overflow: hidden; /* Empêcher le scroll */
   }
 
   .container {

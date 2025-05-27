@@ -57,7 +57,7 @@ document.getElementById("process").addEventListener("change", function () {
 function calculate() {
   const material = document.getElementById("material").value;
   const process = document.getElementById("process").value;
-  const Vc = materialData[material].Vc;
+  const Vc = materialData[material]?.Vc || 0;
 
   if (material === "Selection") {
     document.getElementById("result").innerHTML =
@@ -72,10 +72,8 @@ function calculate() {
     if (!diameter) {
       resultText = "<span>⚠️ Veuillez entrer un diamètre valide.</span>";
     } else {
-      const n = (Vc * 1000) / (Math.PI * diameter);
-      resultText = `<span>🛠️ Vitesse de broche (n) :</span> <br> <strong>${n.toFixed(
-        2
-      )} tours/min</strong>`;
+      const n = Math.round((Vc * 1000) / (Math.PI * diameter)); // Arrondi
+      resultText = `<span>🛠️ Vitesse de broche (n) :</span> <br> <strong>${n} tours/min</strong>`;
     }
   } else if (process === "fraisage") {
     const dCap = parseFloat(document.getElementById("dCap").value);
@@ -85,14 +83,10 @@ function calculate() {
     if (!dCap || !fz || !z) {
       resultText = "<span>⚠️ Veuillez entrer tous les paramètres.</span>";
     } else {
-      const n = (Vc * 1000) / (Math.PI * dCap);
-      const Vf = n * fz * z;
-      resultText = `<span>🛠️ Vitesse de broche (n) :</span> <strong>${n.toFixed(
-        2
-      )} tours/min</strong><br>
-                          <span>🚀 Avance de la table (Vf) :</span> <strong>${Vf.toFixed(
-                            2
-                          )} mm/min</strong>`;
+      const n = Math.round((Vc * 1000) / (Math.PI * dCap)); // Arrondi
+      const Vf = Math.round(n * fz * z); // Arrondi
+      resultText = `<span>🛠️ Vitesse de broche (n) :</span> <strong>${n} tours/min</strong><br>
+                          <span>🚀 Avance de la table (Vf) :</span> <strong>${Vf} mm/min</strong>`;
     }
   } else if (process === "percage") {
     const fn = parseFloat(document.getElementById("fn").value);
@@ -101,10 +95,8 @@ function calculate() {
     if (!fn || !n) {
       resultText = "<span>⚠️ Veuillez entrer les paramètres.</span>";
     } else {
-      const Vf = fn * n;
-      resultText = `<span>🔩 Vitesse de pénétration (Vf) :</span> <strong>${Vf.toFixed(
-        2
-      )} mm/min</strong>`;
+      const Vf = Math.round(fn * n); // Arrondi
+      resultText = `<span>🔩 Vitesse de pénétration (Vf) :</span> <strong>${Vf} mm/min</strong>`;
     }
   } else {
     resultText = "<span>💡 Sélectionnez un type d'usinage.</span>";
