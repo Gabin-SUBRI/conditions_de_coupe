@@ -3,25 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calcul des Conditions de Coupe</title>
+    <title>Calculs d'Usinage</title>
     <link rel="stylesheet" href="styles.css" />
-    <script defer src="script.js"></script>
   </head>
   <body>
     <div class="container">
-      <h1>Calcul des Conditions de Coupe</h1>
-      <label for="operation">🔧 Choisis une opération :</label>
-      <select id="operation" onchange="updateOperation()">
-        <option value="Selectionner">-- Selectionner --</option>
-        <option value="Fraisage">Fraisage</option>
-        <option value="Perçage">Perçage</option>
-        <option value="Tournage">Tournage</option>
-      </select>
+      <h1>Calculs d'Usinage</h1>
 
-      <section class="selection">
-        <label for="material">🛠 Matériaux :</label>
-        <select id="material" onchange="updateValues()">
-          <option value="Selection">-- Selectionner --</option>
+      <section>
+        <label for="process">Type d'usinage :</label>
+        <select id="process">
+          <option value="none">Aucun</option>
+          <!-- Option ajoutée -->
+          <option value="tournage">Tournage</option>
+          <option value="fraisage">Fraisage</option>
+          <option value="percage">Perçage</option>
+        </select>
+      </section>
+
+      <section>
+        <label for="material">Matériau :</label>
+        <select id="material" onchange="updateVc()">
+          <option value="Selection">Selection</option>
           <option value="Acier">Acier</option>
           <option value="Aluminium">Aluminium</option>
           <option value="Cuivre">Cuivre</option>
@@ -38,40 +41,28 @@
           <option value="Laiton">Laiton</option>
           <option value="Nickel">Nickel</option>
         </select>
-
-        <!-- Ajout de l'affichage automatique du Vc -->
-        <label for="Vc">Vitesse de coupe (Vc) :</label>
-        <input type="number" id="Vc" readonly />
-
-        <label for="parametre">📊 Choisis une valeur à calculer :</label>
-        <select id="parametre" onchange="afficherQuestionnaire()">
-          <option value="">-- Sélectionner --</option>
-          <option value="n">Fréquence de rotation (n)</option>
-          <option value="Vf">Vitesse d'avance (Vf)</option>
-          <option value="Tous">Les deux (n et Vf)</option>
-        </select>
       </section>
 
-      <section id="questionnaire" style="display: none">
-        <h2>📝 Paramètres requis :</h2>
-        <div id="inputs"></div>
-        <button class="btn" onclick="calculer()">🔍 Calculer</button>
-        <button class="btn" onclick="resetValues()">🔄 Réinitialiser</button>
+      <section>
+        <label for="vcValue">Vitesse de coupe (Vc) :</label>
+        <input type="number" id="vcValue" readonly />
       </section>
 
-      <section class="resultats">
-        <h2>📌 Résultats :</h2>
-        <div class="output">
-          <p>
-            Fréquence de rotation (n) : <span id="n">---</span>
-            <small>tr/min</small>
-          </p>
-          <p>
-            Vitesse d'avance (Vf) : <span id="Vf">---</span>
-            <small>mm/min</small>
-          </p>
-        </div>
-      </section>
+      <section id="inputs"></section>
+
+      <button class="btn" onclick="calculate()">Calculer</button>
+      <button class="btn reset-btn" onclick="resetFields()">
+        Réinitialiser
+      </button>
     </div>
+
+    <div class="resultats">
+      <h2>Résultats</h2>
+      <div class="output">
+        <p id="result"><small>Les résultats s'afficheront ici.</small></p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
   </body>
 </html>
